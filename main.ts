@@ -6,7 +6,7 @@ const router = new Router();
 
 router
     .get("/", (context) => {
-        context.response.body = { Status: "OK" };
+        context.response.body = { Status: "Update" };
 
     })
     .get("/dinosaurs", (context) => {
