@@ -23,7 +23,6 @@
     "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/streams@^1.0.9": "1.0.9",
-    "jsr:@tajpouria/cors@^1.2.1": "1.2.1",
     "npm:path-to-regexp@^6.3.0": "6.3.0"
   },
   "jsr": {
@@ -104,9 +103,6 @@
     },
     "@std/streams@1.0.9": {
       "integrity": "a9d26b1988cdd7aa7b1f4b51e1c36c1557f3f252880fa6cc5b9f37078b1a5035"
-    },
-    "@tajpouria/cors@1.2.1": {
-      "integrity": "eca42e4fb7cb3906ef0ee3d1e565dd6bb4632ccd8e70a95cf4279759743328f0"
     }
   },
   "npm": {
@@ -119,8 +115,7 @@
       "jsr:@oak/oak@^17.1.4",
       "jsr:@std/assert@1",
       "jsr:@std/dotenv@~0.225.2",
-      "jsr:@std/http@^1.0.8",
-      "jsr:@tajpouria/cors@^1.2.1"
+      "jsr:@std/http@^1.0.8"
     ]
   }
 }
