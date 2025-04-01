@@ -6,7 +6,8 @@ const router = new Router();
 
 router
     .get("/", (context) => {
-        context.response.body = "Welcome to dinosaur API!";
+        context.response.body = { Status: "OK" };
+
     })
     .get("/dinosaurs", (context) => {
         context.response.body = data;
