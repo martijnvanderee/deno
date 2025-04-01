@@ -7,7 +7,8 @@ const handler = async (req: Request): Promise<Response> => {
   const url = new URL(req.url);
 
   if (url.pathname === '/') {
-    return await serveFile(req, './public/index.html');
+    const greeting = Deno.env.get('GREETING') || 'Hello from Deno 1!';
+    return new Response(greeting);
   } else if (url.pathname === '/greet') {
     const greeting = Deno.env.get('GREETING') || 'Hello from Deno 2!';
     return new Response(greeting);
