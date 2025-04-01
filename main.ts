@@ -5,36 +5,28 @@ const router = new Router();
 
 const PORT = Deno.env.get('PORT') || 8000;
 
-// const handler = async (req: Request): Promise<Response> => {
-//   const url = new URL(req.url);
+router
+  .get('/', (context) => {
+    context.response.body = 'Welcome to dinosaur API!';
+  })
+  .get('/dinosaurs', (context) => {
+    context.response.body = data;
+  })
+  .get('/dinosaurs/:dinosaur', (context) => {
+    if (!context?.params?.dinosaur) {
+      context.response.body = 'No dinosaur name provided.';
+    }
 
-//   if (url.pathname === '/') {
-//     const greeting = Deno.env.get('GREETING') || 'Hello from Deno 1!';
-//     return new Response(greeting);
-//   } else if (url.pathname === '/greet') {
-//     const greeting = Deno.env.get('GREETING') || 'Hello from Deno 2!';
-//     return new Response(greeting);
-//   } else {
-//     return new Response('Not Found', { status: 404 });
-//   }
-// };
+    const dinosaur = data.find(
+      (item) =>
+        item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
+    );
 
-router.get('/', (ctx) => {
-  ctx.response.body = 'Hello world';
-});
+    context.response.body = dinosaur ? dinosaur : 'No dinosaur found.';
+  });
 
 const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.listen({ port: 8000 });
-
-// router.get('/', (context) => {
-//   context.response.body = 'Welcome to dinosaur API!';
-// });
-
-// try {
-//   Deno.serve({ port: Number(PORT) }, handler);
-// } catch (err) {
-//   console.error('Error starting the server:', err);
-// }
