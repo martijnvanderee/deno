@@ -1,6 +1,8 @@
 import 'jsr:@std/dotenv/load';
 import { Application, Router } from '@oak/oak';
 
+import data from "./data.json" with { type: "json" };
+
 const router = new Router();
 
 const PORT = Deno.env.get('PORT') || 8000;
