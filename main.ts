@@ -9,7 +9,7 @@ const handler = async (req: Request): Promise<Response> => {
   if (url.pathname === '/') {
     return await serveFile(req, './public/index.html');
   } else if (url.pathname === '/greet') {
-    const greeting = Deno.env.get('GREETING') || 'Hello from Deno 2!';
+    const greeting = Deno.env.get('GREETING') || 'Hello from Deno 1!';
     return new Response(greeting);
   } else {
     return new Response('Not Found', { status: 404 });
