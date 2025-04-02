@@ -32,7 +32,7 @@ router
   
 
 const app = new Application();
-app.use(oakCors({origin:"http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"})); 
+app.use(oakCors({origin:"http://vue-frontend-wjofai-d63e5-168-119-233-159.traefik.me"})); 
 app.use(router.routes());
 app.use(router.allowedMethods());
 
