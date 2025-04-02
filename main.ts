@@ -56,29 +56,47 @@ router
     );
 
     context.response.body = dinosaur ? dinosaur : 'No dinosaur found.';
+  }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+    console.log("test")
+    const { items } = ctx.request.body;
+
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "eur",
+      // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    console.log("test1")
+    ctx.response.body = {
+      clientSecret: paymentIntent.client_secret,
+    }
+
+    console.log("test2")
+  }).post("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+    console.log("test")
+    const { items } = ctx.request.body;
+
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "eur",
+      // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    console.log("test1")
+    ctx.response.body = {
+      clientSecret: paymentIntent.client_secret,
+    }
+
+    console.log("test2")
   })
-
-router.post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
-  console.log("test")
-  const { items } = ctx.request.body;
-
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: "eur",
-    // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-
-  console.log("test1")
-  ctx.response.body = {
-    clientSecret: paymentIntent.client_secret,
-  }
-
-  console.log("test2")
-})
 
 
 const app = new Application();
