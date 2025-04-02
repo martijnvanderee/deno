@@ -62,10 +62,10 @@ router
 
     context.response.body = 4
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
-    const body = await ctx.request.body.json
+    const b = await ctx.request.body.json
 
 
-    ctx.response.body = { body }
+    ctx.response.body = { b }
   })
 
 
