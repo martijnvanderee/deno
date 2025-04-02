@@ -64,6 +64,17 @@ router
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     const body = await ctx.request.body.json()
 
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1000,
+      currency: "eur",
+      // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    console.log("test", paymentIntent)
+
 
     ctx.response.body = body
   })
