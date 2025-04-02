@@ -92,7 +92,7 @@ router
 // })
 
 const app = new Application();
-// app.use(oakCors()); // Enable CORS for All Routes
+app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.routes());
 app.use(router.allowedMethods());
 
