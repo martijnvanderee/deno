@@ -78,7 +78,7 @@ router
     }
 
     console.log("test2")
-  }).post("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+  }).get("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     console.log("test")
     const { items } = ctx.request.body;
 
