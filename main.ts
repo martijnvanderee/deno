@@ -63,9 +63,11 @@ router
     context.response.body = 4
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), (ctx: Context) => {
 
-    const { items } = ctx.request.body;
+    // const { items } = ctx.request.body;
     console.log("test")
-    console.log("test:", items)
+    // console.log("test:", items)
+
+    ctx.response.body = 4
   })
 
 
