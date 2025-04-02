@@ -67,7 +67,7 @@ router
     console.log("test")
     console.log("test:", items)
 
-    ctx.response.body = 5
+    ctx.response.body = 6
   })
 
 
