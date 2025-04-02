@@ -11,7 +11,7 @@ const PORT = Deno.env.get('PORT') || 8000;
 
 router
   .get('/', (context) => {
-    context.response.body = 'Welcome to dinosaur API! 1';
+    context.response.body = 'Welcome to dinosaur API! 2';
   })
   .get('/dinosaurs', (context) => {
     context.response.body = data;
