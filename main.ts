@@ -42,16 +42,16 @@ const corsOptionsDelegate = (request: Request) => {
 };
 
 router
-  .get('/', (context) => {
+  .get('/', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = 'Welcome to dinosaur API! 2';
   })
-  .get('/dinosaurs', (context) => {
+  .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = 14
   })
-  .get('/hello', (context) => {
+  .get('/hello', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = data;
   })
-  .get('/dinosaurs/:dinosaur', (context) => {
+  .get('/dinosaurs/:dinosaur', oakCors(corsOptionsDelegate), (context) => {
     if (!context?.params?.dinosaur) {
       context.response.body = 'No dinosaur name provided.';
     }
@@ -61,14 +61,9 @@ router
     );
 
     context.response.body = 4
-  }).post("/create-payment-intent", async (ctx: Context) => {
-    const reqBody = ctx.request.body
+  }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     const body = await ctx.request.body.json();
 
-    console.log("test")
-    console.log("test:", reqBody)
-
-    console.log("body:", body)
 
     ctx.response.body = 19
   })
@@ -97,7 +92,7 @@ router
 // })
 
 const app = new Application();
-app.use(oakCors()); // Enable CORS for All Routes
+// app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.routes());
 app.use(router.allowedMethods());
 
