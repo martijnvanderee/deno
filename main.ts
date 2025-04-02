@@ -32,8 +32,8 @@ router
   
 
 const app = new Application();
+app.use(oakCors()); 
 app.use(router.routes());
-app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.allowedMethods());
 
 app.listen({ port: 8000 });
