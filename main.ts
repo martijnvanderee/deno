@@ -83,7 +83,7 @@ router
     console.log("test2")
   }).post("/test", oakCors(corsOptionsDelegate), (ctx: Context) => {
     console.log("test")
-    ctx.response.body = data;
+    ctx.response.body = 6
   })
 
 
