@@ -1,5 +1,7 @@
 import 'jsr:@std/dotenv/load';
 import { Application, Router } from '@oak/oak';
+import { oakCors } from "@tajpouria/cors";
+
 
 import data from "./data.json" with { type: "json" };
 
@@ -27,8 +29,11 @@ router
     context.response.body = dinosaur ? dinosaur : 'No dinosaur found.';
   });
 
+  
+
 const app = new Application();
 app.use(router.routes());
+app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.allowedMethods());
 
 app.listen({ port: 8000 });
