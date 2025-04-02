@@ -8,7 +8,7 @@ const router = new Router();
 
 const PORT = Deno.env.get('PORT') || 8000;
 
-const whitelist = ["http://localhost:5173", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me", "*"];
+const whitelist = ["http://localhost:5173", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
 
 const stripe = new Stripe('sk_test_51LAUyaDh7es2g3cdlcOSPfoSHIjgtb0UlG3B8lXF5Ik44wms9bzepBcDETapv1bJP2rO5FXnv4Cm56kfWWClBOCU00ITvmuMAw')
 
@@ -35,6 +35,8 @@ const corsOptionsDelegate = (request: Request) => {
   const isOriginAllowed = whitelist.includes(
     request.headers.get("origin") ?? "",
   );
+
+  console.log("isOriginAllowed:", isOriginAllowed)
 
   return { origin: isOriginAllowed };
 };
@@ -104,5 +106,3 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 app.listen({ port: 8000 });
-
-const a = 4;
