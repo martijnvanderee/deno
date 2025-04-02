@@ -60,7 +60,7 @@ router
         item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
     );
 
-    context.response.body = dinosaur ? dinosaur : 'No dinosaur found.';
+    context.response.body = 1;
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     console.log("test")
     const { items } = ctx.request.body;
@@ -81,7 +81,7 @@ router
     }
 
     console.log("test2")
-  }).get("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+  }).post("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     console.log("test")
     context.response.body = data;
   })
