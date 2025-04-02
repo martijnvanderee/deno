@@ -46,7 +46,7 @@ router
     context.response.body = 'Welcome to dinosaur API! 2';
   })
   .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = 1;
+    context.response.body = 12;
   })
   .get('/hello', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = data;
@@ -60,7 +60,7 @@ router
         item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
     );
 
-    context.response.body = 1;
+    context.response.body = 2;
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     console.log("test")
     const { items } = ctx.request.body;
@@ -81,7 +81,7 @@ router
     }
 
     console.log("test2")
-  }).post("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+  }).get("/test", oakCors(corsOptionsDelegate), async (ctx: Context) => {
     console.log("test")
     context.response.body = data;
   })
