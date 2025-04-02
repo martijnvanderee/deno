@@ -65,7 +65,7 @@ router
     const body = await ctx.request.body.json();
 
 
-    ctx.response.body = 19
+    ctx.response.body = body
   })
 
 
