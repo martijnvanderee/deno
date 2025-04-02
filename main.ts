@@ -62,12 +62,12 @@ router
 
     context.response.body = 4
   }).post("/create-payment-intent", (ctx: Context) => {
+    const reqBody = ctx.request.body().value;
 
-    const { items } = ctx.request.body;
     console.log("test")
-    console.log("test:", ctx.request, ctx.request.body, items)
+    console.log("test:", reqBody)
 
-    ctx.response.body = 7
+    ctx.response.body = 8
   })
 
 
