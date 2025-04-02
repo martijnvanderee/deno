@@ -61,13 +61,16 @@ router
     );
 
     context.response.body = 4
-  }).post("/create-payment-intent", (ctx: Context) => {
+  }).post("/create-payment-intent", async (ctx: Context) => {
     const reqBody = ctx.request.body
+    const body = await ctx.request.body.json();
 
     console.log("test")
     console.log("test:", reqBody)
 
-    ctx.response.body = 9
+    console.log("body:", body)
+
+    ctx.response.body = 19
   })
 
 
