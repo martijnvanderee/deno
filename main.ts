@@ -46,7 +46,7 @@ router
     context.response.body = 'Welcome to dinosaur API! 2';
   })
   .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = data;
+    context.response.body = 1;
   })
   .get('/hello', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = data;
