@@ -58,7 +58,7 @@ router
     context.response.body = dinosaur ? dinosaur : 'No dinosaur found.';
   })
 
-router.post("/create-payment-intent", async (ctx: Context) => {
+router.post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
   console.log("test")
   const { items } = ctx.request.body;
 
