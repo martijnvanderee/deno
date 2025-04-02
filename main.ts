@@ -48,6 +48,9 @@ router
   .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = data;
   })
+  .get('/hello', oakCors(corsOptionsDelegate), (context) => {
+    context.response.body = data;
+  })
   .get('/dinosaurs/:dinosaur', (context) => {
     if (!context?.params?.dinosaur) {
       context.response.body = 'No dinosaur name provided.';
