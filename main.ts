@@ -15,7 +15,6 @@ interface Items {
   amount: number
 }
 
-
 const calculateOrderAmount = (items: Items[]) => {
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
@@ -39,6 +38,10 @@ router
 
     const body = await ctx.request.body.json()
 
+    const products = await stripe.products.list({
+      limit: 3,
+    });
+
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
       line_items: [
@@ -51,6 +54,15 @@ router
     });
 
     ctx.response.body = session.url
+  }).get("/list-of-products", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+
+    const products = await stripe.products.list({
+      limit: 10,
+    });
+
+
+
+    ctx.response.body = products
   })
 
 
