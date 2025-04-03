@@ -80,7 +80,7 @@ router
 
     console.log("create-payment-intent done")
 
-    ctx.response.redirect(session.url)
+    // ctx.response.redirect(session.url)
     ctx.response.body = body
   })
 
