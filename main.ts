@@ -6,6 +6,8 @@ import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 
+console.log(Deno.env.get("GREETING"))
+
 const PORT = Deno.env.get('PORT') || 8000;
 
 const whitelist = ["http://localhost:5173", "http://localhost:5173/", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
@@ -43,7 +45,7 @@ const corsOptionsDelegate = (request: Request) => {
 
 router
   .get('/', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = 'Welcome to dinosaur API! 2';
+    context.response.body = 'Welcome to dinosaur API! 1';
   })
   .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
     context.response.body = 14
