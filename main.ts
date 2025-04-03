@@ -81,8 +81,7 @@ router
     console.log("create-payment-intent done")
     console.log(session.url)
 
-    ctx.response.redirect(session.url)
-    ctx.response.body = body
+    ctx.response.body = session.url
   })
 
 
