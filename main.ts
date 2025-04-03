@@ -2,11 +2,8 @@ import 'jsr:@std/dotenv/load';
 import { Application, Router, type Request, Context } from '@oak/oak';
 import { oakCors } from "@tajpouria/cors";
 import Stripe from "stripe"
-import data from "./data.json" with { type: "json" };
 
 const router = new Router();
-
-const PORT = Deno.env.get('PORT') || 8000;
 
 const whitelist = ["http://localhost:5173", "http://localhost:5173/", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
 
@@ -18,9 +15,6 @@ interface Items {
   amount: number
 }
 
-interface MyRequestBody {
-  items: string;
-}
 
 const calculateOrderAmount = (items: Items[]) => {
   // Calculate the order total on the server to prevent
@@ -37,33 +31,11 @@ const corsOptionsDelegate = (request: Request) => {
     request.headers.get("origin") ?? "",
   );
 
-  console.log("isOriginAllowed:", isOriginAllowed)
-
   return { origin: isOriginAllowed };
 };
 
 router
-  .get('/', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = 'Welcome to dinosaur API! 1';
-  })
-  .get('/dinosaurs', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = 14
-  })
-  .get('/hello', oakCors(corsOptionsDelegate), (context) => {
-    context.response.body = data;
-  })
-  .get('/dinosaurs/:dinosaur', oakCors(corsOptionsDelegate), (context) => {
-    if (!context?.params?.dinosaur) {
-      context.response.body = 'No dinosaur name provided.';
-    }
-    const dinosaur = data.find(
-      (item) =>
-        item.name.toLowerCase() === context.params.dinosaur.toLowerCase()
-    );
-
-    context.response.body = 4
-  }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
-
+  .post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
 
     const body = await ctx.request.body.json()
 
@@ -78,35 +50,9 @@ router
       mode: 'payment',
     });
 
-
-    console.log("create-payment-intent done")
-    console.log(session.url)
-
     ctx.response.body = session.url
   })
 
-
-// .post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
-//   console.log("test")
-//   const { items } = ctx.request.body;
-
-//   // Create a PaymentIntent with the order amount and currency
-//   const paymentIntent = await stripe.paymentIntents.create({
-//     amount: calculateOrderAmount(items),
-//     currency: "eur",
-//     // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-//     automatic_payment_methods: {
-//       enabled: true,
-//     },
-//   });
-
-//   console.log("test1")
-//   ctx.response.body = {
-//     clientSecret: paymentIntent.client_secret,
-//   }
-
-//   console.log("test2")
-// })
 
 const app = new Application();
 app.use(oakCors()); // Enable CORS for All Routes
