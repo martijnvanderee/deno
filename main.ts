@@ -6,8 +6,6 @@ import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 
-
-
 const PORT = Deno.env.get('PORT') || 8000;
 
 const whitelist = ["http://localhost:5173", "http://localhost:5173/", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
@@ -64,9 +62,9 @@ router
 
     context.response.body = 4
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
-    console.log("create-payment-intent")
 
     console.log("test:", Deno.env.get("GREETING"))
+
     const body = await ctx.request.body.json()
 
     const session = await stripe.checkout.sessions.create({
@@ -80,7 +78,6 @@ router
       mode: 'payment',
     });
 
-    console.log("session:", session)
 
     console.log("create-payment-intent done")
     console.log(session.url)
