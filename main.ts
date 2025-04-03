@@ -6,7 +6,7 @@ import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 
-console.log(Deno.env.get("GREETING"))
+console.log("test", Deno.env.get("GREETING"))
 
 const PORT = Deno.env.get('PORT') || 8000;
 
