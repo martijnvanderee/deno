@@ -56,13 +56,13 @@ router
     ctx.response.body = session.url
   }).get("/list-of-products", oakCors(corsOptionsDelegate), async (ctx: Context) => {
 
-    const products = await stripe.products.list({
-      limit: 10,
-    }) ?? ""
+    // const products = await stripe.products.list({
+    //   limit: 10,
+    // }) ?? ""
 
 
 
-    ctx.response.body = { a: 4, products }
+    ctx.response.body = { a: 4 }
   })
 
 
