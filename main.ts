@@ -58,11 +58,11 @@ router
 
     const products = await stripe.products.list({
       limit: 10,
-    });
+    }) ?? ""
 
 
 
-    ctx.response.body = products
+    ctx.response.body = { a: 4, products }
   })
 
 
