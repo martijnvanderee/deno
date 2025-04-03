@@ -62,6 +62,7 @@ router
 
     context.response.body = 4
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+    console.log("create-payment-intent")
     const body = await ctx.request.body.json()
 
     const session = await stripe.checkout.sessions.create({
@@ -75,6 +76,9 @@ router
       mode: 'payment',
     });
 
+    console.log("session:", session)
+
+    console.log("create-payment-intent done")
     ctx.response.body = body
   })
 
