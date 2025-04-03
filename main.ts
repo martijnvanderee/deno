@@ -10,8 +10,9 @@ const PORT = Deno.env.get('PORT') || 8000;
 
 const whitelist = ["http://localhost:5173", "http://localhost:5173/", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
 
-const stripe = new Stripe('sk_test_51LAUyaDh7es2g3cdlcOSPfoSHIjgtb0UlG3B8lXF5Ik44wms9bzepBcDETapv1bJP2rO5FXnv4Cm56kfWWClBOCU00ITvmuMAw')
+const stripeKey = Deno.env.get('STRIPE_SECRET_KEY') ?? ""
 
+const stripe = new Stripe(stripeKey)
 
 interface Items {
   amount: number
@@ -63,7 +64,6 @@ router
     context.response.body = 4
   }).post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
 
-    console.log("test:", Deno.env.get("GREETING"))
 
     const body = await ctx.request.body.json()
 
