@@ -59,7 +59,7 @@ router
       limit: 10,
     });
 
-    ctx.response.body = products
+    ctx.response.body = products.data
     await next();
   })
 
