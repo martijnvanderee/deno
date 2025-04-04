@@ -8,6 +8,7 @@ const router = new Router();
 const whitelist = ["http://localhost:5173", "http://localhost:5173/", "http://vue-frontend-wjofai-d643e5-168-119-233-159.traefik.me"];
 
 const stripeKey = Deno.env.get('STRIPE_SECRET_KEY') ?? ""
+const port = parseInt(Deno.env.get('PORT') ?? "8000")
 
 const stripe = new Stripe(stripeKey)
 
@@ -34,13 +35,10 @@ const corsOptionsDelegate = (request: Request) => {
 };
 
 router
-  .post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+  .post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context, next) => {
 
     const body = await ctx.request.body.json()
 
-    const products = await stripe.products.list({
-      limit: 3,
-    });
 
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
@@ -54,21 +52,22 @@ router
     });
 
     ctx.response.body = session.url
-  }).get("/list-of-products", oakCors(corsOptionsDelegate), async (ctx: Context) => {
+    await next();
+  }).get("/list-of-products", async (ctx: Context, next) => {
 
     const products = await stripe.products.list({
       limit: 10,
-    }) ?? ""
+    });
 
-
-
-    ctx.response.body = { a: 4, test: products }
+    ctx.response.body = products
+    await next();
   })
 
 
 const app = new Application();
-app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.routes());
+app.use(oakCors()); // Enable CORS for All Routes
 app.use(router.allowedMethods());
 
-app.listen({ port: 8000 });
+console.log(`listen to port ${port}`)
+app.listen({ port });
