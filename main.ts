@@ -43,12 +43,7 @@ router
 
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
-      line_items: [
-        {
-          price: 'price_1PSQDBDh7es2g3cd0ynjrjt3',
-          quantity: 2,
-        },
-      ],
+      line_items: body,
       mode: 'payment',
     });
 
