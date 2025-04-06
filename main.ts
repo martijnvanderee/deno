@@ -35,10 +35,9 @@ const corsOptionsDelegate = (request: Request) => {
 };
 
 router
-  .post("/create-payment-intent", oakCors(corsOptionsDelegate), async (ctx: Context, next) => {
+  .post("/create-payment-intent", async (ctx: Context, next) => {
 
     const body = await ctx.request.body.json()
-
 
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
