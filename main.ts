@@ -39,6 +39,8 @@ router
 
     const body = await ctx.request.body.json()
 
+    console.log("body", body)
+
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
       line_items: [
