@@ -39,11 +39,14 @@ router
 
     const body = await ctx.request.body.json()
 
+    console.log("body", body)
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
       line_items: body,
       mode: 'payment',
     });
+
+    console.log("session", session)
 
     ctx.response.body = session.url
     await next();
@@ -64,11 +67,7 @@ router
       return product
     })
 
-    console.log("newProductsPromise", newProductsPromise)
-
     const newProducts = await Promise.all(newProductsPromise);
-
-    console.log("newproducts", newProducts)
 
     ctx.response.body = newProducts
     await next();
