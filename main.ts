@@ -53,11 +53,16 @@ router
       limit: 10,
     });
 
-    console.log("product", products)
-    // const newProducts = products.map(async (product) => {
-    //   const price = await stripe.prices.retrieve(product.default_price);
-    //   return { product, price }
-    // })
+    const newProducts = products.data.map(async (product) => {
+
+      if (typeof product.default_price === "string") {
+        const price = await stripe.prices.retrieve(product.default_price);
+        return { product, price }
+      }
+
+      return product
+
+    })
 
 
     ctx.response.body = products.data
