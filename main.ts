@@ -39,8 +39,6 @@ router
 
     const body = await ctx.request.body.json()
 
-    console.log("body", body)
-
     const session = await stripe.checkout.sessions.create({
       success_url: 'http://localhost:5173/succes',
       line_items: body,
@@ -54,6 +52,13 @@ router
     const products = await stripe.products.list({
       limit: 10,
     });
+
+    console.log("product", products)
+    // const newProducts = products.map(async (product) => {
+    //   const price = await stripe.prices.retrieve(product.default_price);
+    //   return { product, price }
+    // })
+
 
     ctx.response.body = products.data
     await next();
