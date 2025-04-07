@@ -53,7 +53,7 @@ router
       limit: 10,
     });
 
-    const newProducts = products.data.map(async (product) => {
+    const newProductsPromise = products.data.map(async (product) => {
       console.log("product", product)
       console.log("product", product, typeof product.default_price)
 
@@ -63,10 +63,14 @@ router
         console.log("type of",)
         return { ...product, price }
       }
+
+
       return product
     })
 
-    console.log("", newProducts)
+    const newProducts = await Promise.all(newProductsPromise);
+
+
 
     ctx.response.body = newProducts
     await next();
