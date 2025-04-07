@@ -57,7 +57,7 @@ router
 
       if (typeof product.default_price === "string") {
         const price = await stripe.prices.retrieve(product.default_price);
-        return { product, price }
+        return { ...product, price }
       }
 
       return product
@@ -65,7 +65,7 @@ router
     })
 
 
-    ctx.response.body = products.data
+    ctx.response.body = newProducts
     await next();
   })
 
