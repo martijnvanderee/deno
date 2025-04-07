@@ -54,16 +54,12 @@ router
     });
 
     const newProductsPromise = products.data.map(async (product) => {
-      console.log("product", product)
-      console.log("product", product, typeof product.default_price)
 
       if (typeof product.default_price === "string") {
         const price = await stripe.prices.retrieve(product.default_price);
 
-        console.log("type of",)
         return { ...product, price }
       }
-
 
       return product
     })
