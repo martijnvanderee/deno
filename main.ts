@@ -64,9 +64,11 @@ router
       return product
     })
 
+    console.log("newProductsPromise", newProductsPromise)
+
     const newProducts = await Promise.all(newProductsPromise);
 
-
+    console.log("newproducts", newProducts)
 
     ctx.response.body = newProducts
     await next();
